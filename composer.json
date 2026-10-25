@@ -1,0 +1,60 @@
+{
+    "name": "stacktoast/installer",
+    "description": "Installer for Stack Toast, the Laravel SaaS starter kit. Starts a project from any edition, and checks a machine meets the requirements first.",
+    "keywords": [
+        "laravel",
+        "saas",
+        "saas-boilerplate",
+        "saas-starter-kit",
+        "starter-kit",
+        "boilerplate",
+        "installer",
+        "scaffolding",
+        "cli",
+        "subscriptions",
+        "billing",
+        "stripe",
+        "livewire",
+        "inertia"
+    ],
+    "homepage": "https://stacktoast.com",
+    "license": "MIT",
+    "type": "library",
+    "support": {
+        "issues": "https://github.com/stacky-hash/installer/issues",
+        "source": "https://github.com/stacky-hash/installer",
+        "docs": "https://stacktoast.com/docs/"
+    },
+    "require": {
+        "php": "^8.4",
+        "ext-json": "*",
+        "symfony/console": "^7.0",
+        "symfony/process": "^7.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "StackToast\\Installer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StackToast\\Installer\\Tests\\": "tests/"
+        }
+    },
+    "bin": ["bin/stacktoast"],
+    "scripts": {
+        "test": "phpunit",
+        "lint": "pint --test",
+        "fix": "pint",
+        "quality": ["@lint", "@test"]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

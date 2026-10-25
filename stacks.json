@@ -1,0 +1,29 @@
+{
+    "$comment": "The edition catalogue. This file is public, so an edition appears here when it is available and not before. Data only: no commands, no scripts, and no URLs the installer executes. Clone targets are assembled from the host and account compiled into Brand, using only the repository name below.",
+    "version": 1,
+    "php": "8.4.0",
+    "node": "^20.19.0 || >=22.12.0",
+    "stacks": {
+        "livewire": {
+            "repo": "stacktoast",
+            "title": "Stack Toast",
+            "description": "Full stack: Blade pages with Alpine and Livewire, Tailwind, plus the API.",
+            "default": true
+        },
+        "api": {
+            "repo": "stacktoast-api",
+            "title": "Stack Toast API",
+            "description": "API stack: Sanctum endpoints and the admin panel, without the Blade app pages."
+        },
+        "react": {
+            "repo": "stacktoast-react",
+            "title": "Stack Toast React",
+            "description": "Full stack: Inertia pages in React, plus the API."
+        },
+        "vue": {
+            "repo": "stacktoast-vue",
+            "title": "Stack Toast Vue",
+            "description": "Full stack: Inertia pages in Vue, plus the API."
+        }
+    }
+}
