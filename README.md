@@ -8,6 +8,12 @@ stacktoast check      # will this machine run it? No purchase needed
 stacktoast new my-app
 ```
 
+Keep it current with `composer global update stacktoast/installer`. The edition
+catalogue ships inside the package, so an edition added after you installed the
+CLI appears once you update. `stacktoast check` says so when a newer release
+has been published; set `STACKTOAST_NO_UPDATE_CHECK=1` where that request
+should not be made.
+
 ## What is Stack Toast?
 
 A SaaS starter kit for Laravel. You begin with the parts every subscription business needs already built, tested and wired together, and write your own product on top.
@@ -20,7 +26,7 @@ A SaaS starter kit for Laravel. You begin with the parts every subscription busi
 
 **Hardened before you ship.** A configurable Content Security Policy, Cloudflare visitor data, three captcha providers, a bot challenge, and session fingerprinting that deliberately does not bind a session to a client IP — because that signs mobile users out when they move onto cellular.
 
-**Operations that usually get written twice.** A scheduler already configured, a `stacktoast:health` doctor, user data export, admin impersonation with a time limit, `noindex` by default on app routes with a sitemap built from your own route config, and per-edition documentation for Claude Code, Cursor and Codex generated from the same source as the code it describes.
+**Operations that usually get written twice.** A scheduler already configured, a `stacktoast:health-check` doctor, user data export, admin impersonation with a time limit, `noindex` by default on app routes with a sitemap built from your own route config, and per-edition documentation for Claude Code, Cursor and Codex generated from the same source as the code it describes.
 
 Backed by 1,168 backend tests, 244 frontend tests and PHPStan level 6.
 

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace StackToast\Installer\Commands;
 
+use StackToast\Installer\Application;
 use StackToast\Installer\Environment\Doctor;
 use StackToast\Installer\Environment\Outcome;
 use StackToast\Installer\Environment\Result;
 use StackToast\Installer\Stacks\StackCatalogue;
+use StackToast\Installer\Update\LatestVersion;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -96,11 +98,37 @@ class CheckCommand extends Command
 
         if ($failures !== []) {
             $io->error(sprintf('%d requirement%s unmet.', count($failures), count($failures) === 1 ? '' : 's'));
+            $this->renderUpdate($io);
 
             return;
         }
 
         $io->success('This machine is ready.');
+        $this->renderUpdate($io);
+    }
+
+    /**
+     * Say so when a newer release of this CLI has been published.
+     *
+     * Here rather than anywhere else because this is the command people run
+     * when something is wrong, and an out-of-date CLI is one of the things it
+     * can be. Silent when the version cannot be determined: a machine with no
+     * network is reporting on itself, not on Packagist.
+     */
+    private function renderUpdate(SymfonyStyle $io): void
+    {
+        $newer = LatestVersion::newerThan(Application::VERSION);
+
+        if ($newer === null) {
+            return;
+        }
+
+        $io->writeln(sprintf(
+            '  <fg=gray>A newer installer is available: %s (this is %s). Update with</> composer global update stacktoast/installer',
+            $newer,
+            Application::VERSION,
+        ));
+        $io->newLine();
     }
 
     /**

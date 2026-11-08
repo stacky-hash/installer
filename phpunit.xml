@@ -11,6 +11,10 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <!-- No test reaches Packagist to ask whether a newer CLI exists. -->
+        <env name="STACKTOAST_NO_UPDATE_CHECK" value="1"/>
+    </php>
     <source>
         <include>
             <directory>src</directory>

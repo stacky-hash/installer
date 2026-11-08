@@ -2,7 +2,7 @@
     "$comment": "The edition catalogue. This file is public, so an edition appears here when it is available and not before. Data only: no commands, no scripts, and no URLs the installer executes. Clone targets are assembled from the host and account compiled into Brand, using only the repository name below.",
     "version": 1,
     "php": "8.4.0",
-    "node": "^20.19.0 || >=22.12.0",
+    "node": ">=24",
     "stacks": {
         "livewire": {
             "repo": "stacktoast",

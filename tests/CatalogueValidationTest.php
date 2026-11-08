@@ -7,6 +7,7 @@ namespace StackToast\Installer\Tests;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use StackToast\Installer\Brand;
+use StackToast\Installer\Environment\VersionRange;
 use StackToast\Installer\Stacks\StackCatalogue;
 
 /**
@@ -58,6 +59,17 @@ class CatalogueValidationTest extends TestCase
         $this->assertNotNull($catalogue);
         $this->assertSame('my-repo', $catalogue->get('mine')?->repository);
         $this->assertSame('8.5.0', $catalogue->php);
+    }
+
+    public function test_the_bundled_node_range_is_the_one_the_application_declares(): void
+    {
+        // A machine that passes `check` and then fails `npm install` is worse
+        // than one the check turned away: the clone has already happened.
+        $catalogue = StackCatalogue::bundled();
+
+        $this->assertSame(Brand::APP_NODE, $catalogue->node);
+        $this->assertFalse(VersionRange::satisfies('22.12.0', $catalogue->node));
+        $this->assertTrue(VersionRange::satisfies('24.0.0', $catalogue->node));
     }
 
     public function test_a_clone_target_is_assembled_from_the_compiled_in_account(): void

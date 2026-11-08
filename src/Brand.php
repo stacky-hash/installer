@@ -49,10 +49,10 @@ final class Brand
     public const APP_PHP = '8.4.0';
 
     /**
-     * The Node range the application's build tooling requires, as declared by
-     * the Vite release it pins.
+     * The Node range the application's build tooling requires, as its
+     * `package.json` declares it.
      */
-    public const APP_NODE = '^20.19.0 || >=22.12.0';
+    public const APP_NODE = '>=24';
 
     /**
      * An HTTPS clone URL for a repository in the product account.

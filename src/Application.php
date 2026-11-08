@@ -15,7 +15,12 @@ use Symfony\Component\Console\Application as Console;
  */
 final class Application extends Console
 {
-    public const VERSION = '0.1.0';
+    /**
+     * 1.x from the first public release on purpose. `composer global require`
+     * writes a caret constraint, and on a 0.x version a caret stops at the
+     * next minor, so `composer global update` could never cross to 0.2.0.
+     */
+    public const VERSION = '1.0.0';
 
     public function __construct()
     {
