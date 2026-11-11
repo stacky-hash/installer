@@ -20,7 +20,7 @@ final class Application extends Console
      * writes a caret constraint, and on a 0.x version a caret stops at the
      * next minor, so `composer global update` could never cross to 0.2.0.
      */
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.0.1';
 
     public function __construct()
     {

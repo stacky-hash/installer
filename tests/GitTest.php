@@ -73,6 +73,23 @@ class GitTest extends TestCase
         $this->assertSame('3', $this->gitCommand($target, ['rev-list', '--count', 'HEAD']));
     }
 
+    public function test_a_new_project_starts_on_a_branch_rather_than_a_detached_head(): void
+    {
+        $git = new Git;
+        $target = $this->root.DIRECTORY_SEPARATOR.'app';
+
+        $this->assertTrue($git->cloneAtTag($this->upstream, 'v0.10.0', $target));
+        $this->assertSame('', $this->gitCommand($target, ['branch', '--show-current']));
+
+        $this->assertTrue($git->createBranch($target, 'main'));
+
+        $this->assertSame('main', $this->gitCommand($target, ['branch', '--show-current']));
+        $this->assertSame(
+            $this->gitCommand($target, ['rev-parse', 'v0.10.0^{commit}']),
+            $this->gitCommand($target, ['rev-parse', 'HEAD'])
+        );
+    }
+
     public function test_it_rewires_the_remotes_so_upgrades_and_your_own_repository_coexist(): void
     {
         $git = new Git;

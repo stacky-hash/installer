@@ -79,7 +79,7 @@ stacktoast new my-app --stack=api --no-interaction
 stacktoast new my-app --origin=git@github.com:me/my-app.git
 ```
 
-`new` clones the edition at its newest tag, keeps the full history, and sets the remotes up so upgrades work:
+`new` clones the edition at its newest tag, keeps the full history, puts the project on a `main` branch of its own, and sets the remotes up so upgrades work:
 
 | Remote       | Points at              | Used by                                                        |
 | ------------ | ---------------------- | -------------------------------------------------------------- |

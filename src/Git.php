@@ -108,6 +108,19 @@ class Git
         return $process instanceof Process && $process->isSuccessful();
     }
 
+    /**
+     * Put a fresh clone on a branch of its own.
+     *
+     * A clone at a tag leaves HEAD detached: a first commit would belong to
+     * no branch, and `git push origin main` would have nothing to send.
+     */
+    public function createBranch(string $directory, string $name): bool
+    {
+        $process = $this->run(['checkout', '--quiet', '-b', $name], $directory);
+
+        return $process instanceof Process && $process->isSuccessful();
+    }
+
     public function renameRemote(string $directory, string $from, string $to): bool
     {
         $process = $this->run(['remote', 'rename', $from, $to], $directory);

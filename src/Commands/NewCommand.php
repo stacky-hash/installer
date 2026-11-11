@@ -122,6 +122,10 @@ class NewCommand extends Command
             return Command::FAILURE;
         }
 
+        if (! $this->git->createBranch($directory, 'main')) {
+            $io->warning('Could not create the `main` branch. Run `git switch -c main` in the project before your first commit.');
+        }
+
         // Upstream is `stacktoast` so that `origin` stays the customer's own
         // repository; upgrades fetch tags from the former and never the latter.
         if (! $this->git->renameRemote($directory, 'origin', 'stacktoast')) {
@@ -192,7 +196,7 @@ class NewCommand extends Command
         $io->writeln('  <options=bold>Remotes</>');
         $io->writeln('    <fg=gray>stacktoast</>  upstream; `php artisan stacktoast:upgrade` fetches tags from here');
         $io->writeln($origin === null
-            ? '    <fg=gray>origin</>      not set. Add your own repository: git remote add origin <url>'
+            ? '    <fg=gray>origin</>      not set. Add your own repository: git remote add origin <url> && git push -u origin main'
             : sprintf('    <fg=gray>origin</>      %s', $origin));
         $io->newLine();
     }
