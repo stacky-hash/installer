@@ -21,10 +21,11 @@ final class Brand
     public const HOST = 'github.com';
 
     /**
-     * The account holding the SKU repositories. Customers are added to these
-     * as collaborators; access to them is the licence.
+     * The organisation holding the SKU repositories. Customers are added to
+     * these as collaborators; access to them is the licence. This package
+     * itself is published from another account, named in CATALOGUE_URL.
      */
-    public const OWNER = 'stacky-hash';
+    public const OWNER = 'stacktoast';
 
     /**
      * The product site, and where anyone without access is sent.
