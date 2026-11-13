@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace StackToast\Installer;
 
 use StackToast\Installer\Commands\CheckCommand;
+use StackToast\Installer\Commands\LinkCommand;
 use StackToast\Installer\Commands\NewCommand;
 use StackToast\Installer\Commands\StacksCommand;
 use StackToast\Installer\Commands\WhoamiCommand;
@@ -20,7 +21,7 @@ final class Application extends Console
      * writes a caret constraint, and on a 0.x version a caret stops at the
      * next minor, so `composer global update` could never cross to 0.2.0.
      */
-    public const VERSION = '1.0.1';
+    public const VERSION = '1.1.0';
 
     public function __construct()
     {
@@ -28,6 +29,7 @@ final class Application extends Console
 
         $this->addCommands([
             new NewCommand,
+            new LinkCommand,
             new CheckCommand,
             new StacksCommand,
             new WhoamiCommand,

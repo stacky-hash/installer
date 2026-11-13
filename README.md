@@ -90,6 +90,28 @@ That split is why one purchase covers many projects: each clone has its own `ori
 
 `new` then hands off to `configure-stacktoast.php`, the setup wizard: it installs dependencies, writes `.env`, migrates, seeds and builds assets. Skip it with `--no-configure`.
 
+Release tags are kept under `refs/stacktoast/tags/`, apart from your own, so a `v1.2.0` you tag for your product is never read as a Stack Toast release.
+
+## Inside an existing repository
+
+Run `new` inside a git repository and it asks which of two things you mean, because a clone there would be a nested repository nobody asked for:
+
+```bash
+stacktoast new backend --stack=api --mode=subtree      # add it to this repository, in backend/
+stacktoast new backend --stack=api --mode=standalone   # a separate repository in backend/
+```
+
+`subtree` adds the edition under that directory as one merge commit on your current branch. The release becomes an ancestor of your history, which is what later upgrades merge from; `origin` and your branches are left alone. It needs a repository with at least one commit and nothing staged, and a Stack Toast release new enough to upgrade from a subdirectory. Without `--mode`, a non-interactive run stops and names both.
+
+## Reconnect an install to its releases
+
+```bash
+stacktoast link --dry-run
+stacktoast link
+```
+
+For an install that has the files of a release and no shared history with it: a zip download, or a branch that was squashed or rebased on its way in. `link` reads the edition and version from `stacktoast-manifest.json`, adds the `stacktoast` remote if it is missing, fetches the releases and records the one you are on as an ancestor. No file changes. It also sets up the remote and release tags in a teammate's fresh clone, where it then reports there is nothing left to link.
+
 ## Which editions can I reach?
 
 ```bash

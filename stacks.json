@@ -3,6 +3,7 @@
     "version": 1,
     "php": "8.4.0",
     "node": ">=24",
+    "releaseRefsSince": "1.2.0",
     "stacks": {
         "livewire": {
             "repo": "stacktoast",

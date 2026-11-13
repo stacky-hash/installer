@@ -38,7 +38,24 @@ final class StackCatalogue
         private readonly array $stacks,
         public readonly string $php,
         public readonly string $node,
+        public readonly ?string $releaseRefsSince = null,
     ) {}
+
+    /**
+     * Whether a release keeps its tags in the release namespace and can be
+     * upgraded from a subdirectory of a larger repository.
+     *
+     * A release older than the floor ships an upgrade command that reads
+     * `refs/tags/` and assumes the repository root is the application root.
+     * Under a prefix it does not fail; it reports the wrong thing.
+     *
+     * @param  string  $tag  As the release names it, e.g. v1.2.0
+     */
+    public function supportsReleaseRefs(string $tag): bool
+    {
+        return $this->releaseRefsSince !== null
+            && version_compare(ltrim($tag, 'vV'), $this->releaseRefsSince, '>=');
+    }
 
     /**
      * The catalogue shipped inside this package.
@@ -114,6 +131,10 @@ final class StackCatalogue
             stacks: $stacks,
             php: is_string($decoded['php'] ?? null) ? $decoded['php'] : Brand::APP_PHP,
             node: is_string($decoded['node'] ?? null) ? $decoded['node'] : Brand::APP_NODE,
+            releaseRefsSince: is_string($decoded['releaseRefsSince'] ?? null)
+                && preg_match('/^\d+\.\d+\.\d+$/', $decoded['releaseRefsSince']) === 1
+                ? $decoded['releaseRefsSince']
+                : null,
         );
     }
 
